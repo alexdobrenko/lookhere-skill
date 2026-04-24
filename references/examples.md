@@ -10,7 +10,7 @@ Good for: daily action review, email triage, anything with a decision per item.
 
 ```json
 {
-  "title": "Morning Briefing — Apr 23",
+  "title": "Morning Briefing, Apr 23",
   "metrics": [
     {"label": "Unread emails", "value": 14},
     {"label": "Slack DMs", "value": 3},
@@ -95,7 +95,7 @@ Good for: reviewing a list of things you wrote and deciding what to keep, cut, o
 
 ```json
 {
-  "title": "C4C LinkedIn post queue — April",
+  "title": "C4C LinkedIn post queue, April",
   "items": [
     {
       "title": "Post 1: The agentic loop",

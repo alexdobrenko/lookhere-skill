@@ -14,7 +14,7 @@ Built on Alex Dobrenko's lookhere server (Cloudflare Workers + KV). This is the 
 
 **Doc mode:** Formatted document with inline-editable sections, per-section notes, and a "Copy Text / Send to Claude" toolbar. Good for email drafts, session recaps, briefings you need to review and edit.
 
-**Items mode:** Scrollable card list where each item has action buttons and editable fields. Long context blocks (200+ chars or anything stored under a `body` key) collapse by default. Good for morning triage, batch decisions, post queues.
+**Items mode:** Scrollable card list where each item has action buttons and editable fields. Long context blocks (200+ chars or anything stored under a `body` key) render as full-width rich text so the whole thing is visible. Good for morning triage, batch decisions, post queues.
 
 ---
 

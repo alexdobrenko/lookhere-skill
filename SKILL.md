@@ -92,7 +92,7 @@ Value type rules (automatic, you don't pick the UI element):
 | JSON value | Renders as |
 |---|---|
 | Short string (under 200 chars) | Read-only label |
-| Long string (200+ chars) or key named `body` | Collapsible rich text |
+| Long string (200+ chars) or key named `body` | Full-width rich text block |
 | Array of 1-4 strings | Button group |
 | Array of 5+ strings | Dropdown |
 | `""` (empty string) | Text input |
