@@ -6,6 +6,8 @@ You describe your data (morning briefing items, email drafts, decisions to revie
 
 No deploy. No login. No setup on your end. Pages expire in 30 days.
 
+**Privacy:** pages are publicly viewable by anyone with the URL. Don't publish things you wouldn't want a stranger to see. The slug is random, but if it leaks (Discord paste, screen share, etc.) the page is open.
+
 Built on Alex Dobrenko's lookhere server (Cloudflare Workers + KV). This is the student-facing version shipped to C4C Cohort 3.
 
 ---
@@ -25,6 +27,8 @@ npx skills add alexdobrenko/lookhere-skill --skill lookhere -g
 ```
 
 That's it. No keys, no config. The skill uses Alex's hosted server directly.
+
+**Requires:** `python3` and `curl` on your PATH (both pre-installed on macOS and most Linux). The script uses `pbcopy` (macOS), `xclip` (Linux X11), or `wl-copy` (Linux Wayland) to copy the URL to clipboard if available; otherwise it just prints to stdout.
 
 ---
 

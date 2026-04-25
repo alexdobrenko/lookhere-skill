@@ -1,10 +1,6 @@
 ---
 name: lookhere
-description: >
-  Turn structured JSON into interactive HTML pages and get a shareable URL.
-  Use when asked to "make a page", "build a briefing view", "create a review page",
-  "publish this as a page", "make this interactive", "turn this into a triage view",
-  or "show this in a browser". Pages expire in 30 days. No auth required.
+description: Build a quick review, triage, or decision page from structured data and get a shareable URL. Fires when the user wants an interactive surface to look at items, edit drafts, or click through choices. Triggers - "make a briefing view", "make a triage page", "review page for these items", "make this clickable", "let me click through these", "show me a page to review", "make a decision view", "make a page from this". Not for raw HTML files (use /publish for that). Pages expire in 30 days. No auth.
 ---
 
 # lookhere
@@ -76,6 +72,8 @@ You can also use structured sections instead of markdown (more control):
   "signoff": "Let me know your thinking.\n-Alex"
 }
 ```
+
+The `prompt` field on a section renders as a styled callout block underneath the body. Use it when you want the reader to react to a specific question, not just read a paragraph.
 
 ---
 
@@ -166,6 +164,10 @@ Response: `{"url":"https://...","slug":"abc123","size":12345,"expires_at":"..."}
 - No auth required. Anyone with the URL can view.
 - Slugs are random. Pages are not listed anywhere.
 - Max payload: 5MB.
+
+### Privacy heads-up
+
+Pages are public to anyone with the URL. The slug is random, but if it leaks (Discord paste, screen share, browser history, forwarded email), the page is open. Don't publish anything you wouldn't want a stranger to see: client emails, financial data, private DMs, anything under NDA. If in doubt, redact before you publish.
 
 ---
 
