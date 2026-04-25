@@ -15,6 +15,20 @@ Publish structured data as a styled, interactive HTML page. You get back a URL. 
 
 ---
 
+## Picking a mode
+
+Quick rule:
+
+- **Reading + editing a draft** (email, recap, briefing, post copy): doc mode.
+- **Triage + per-item action** (todos, decisions, routing, approvals): items mode.
+- **Reference info plus actions** (notes you'll come back to AND things to act on): items mode with `body` fields on the reference items.
+
+If the user wants to think out loud and pick a direction at the end, that's doc mode with `sections` and `prompt` fields. See "Deliberation page" in Quick patterns below.
+
+One thing to know: in items mode, the JSON key names become the visible field labels. So `notes` shows as "Notes," `q2_status` shows as "Q2 Status." Pick keys the user will read.
+
+---
+
 ## Two modes you need
 
 ### Mode 1: Doc mode
@@ -101,6 +115,28 @@ Value type rules (automatic, you don't pick the UI element):
 | Non-zero number | Display number |
 | `{"value": "...", "edit": true}` | Pre-filled editable field |
 
+**Common trap:** plain short strings render as read-only labels. If a user wants to edit text inline (a draft, a quote, a paragraph), use the `{"value": "...", "edit": true}` form. Bare strings will silently ship as non-editable.
+
+### Inline editable drafts (the common review pattern)
+
+When a user says "let me edit each one inline" or "review these drafts," combine three primitives per item: editable text via `value/edit`, a button group for the action, and `null` for free notes.
+
+```json
+{
+  "title": "5 LinkedIn drafts",
+  "items": [
+    {
+      "title": "Post 1: The agentic loop",
+      "draft": {"value": "Everyone's talking about AI agents...", "edit": true},
+      "action": ["Approve", "Revise", "Cut"],
+      "notes": null
+    }
+  ]
+}
+```
+
+This is the shape for any "review and edit a list of things" flow.
+
 ---
 
 ## How to publish
@@ -136,7 +172,7 @@ Response: `{"url":"https://...","slug":"abc123","size":12345,"expires_at":"..."}
 ## Quick patterns
 
 **Morning briefing with action buttons:**
-Build an `items` array. Each item gets a `title`, optional `context` (long string, collapses automatically), and `action` array with 3-4 button labels.
+Build an `items` array. Each item gets a `title`, optional `context` (long string renders as a rich-text block; short string renders as a read-only label), and `action` array with 3-4 button labels.
 
 **Session recap email to review:**
 Use `mode: "doc"` with the email body as `text`. The person opens the page, edits inline, hits "Copy Text," pastes into Gmail.
@@ -147,4 +183,7 @@ Items layout with button groups. Add `"metrics": [{"label": "Total", "value": 12
 **Draft review with per-section notes:**
 Doc mode with structured `sections`. Each section gets a note-toggle button on hover.
 
-See `references/examples.md` for copy-paste examples of all four.
+**Deliberation page (think through a decision):**
+Doc mode with `sections`. Use `body` to lay out each option's facts, then add a `prompt` field per section to ask the user a reaction question. Ends with a final section that has only a `prompt` and an empty body, where they pick a direction. This is the shape for "I need to think through these options and write notes per option."
+
+See `references/examples.md` for copy-paste examples.
