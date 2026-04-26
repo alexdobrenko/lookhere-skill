@@ -1,6 +1,6 @@
 # lookhere Examples
 
-Copy-paste payloads for the four most useful patterns.
+Copy-paste payloads for the five most useful patterns.
 
 ---
 
@@ -116,5 +116,20 @@ Good for: reviewing a list of things you wrote and deciding what to keep, cut, o
       "action": ["Approve", "Revise", "Cut"]
     }
   ]
+}
+```
+
+---
+
+## 5. Report (read-first, optional feedback)
+
+Good for: sharing research outputs, strategy docs, episode recaps, post-mortems - anything where the reader should read before reacting. Feedback toggle reveals per-section notes and a "Copy Feedback" button.
+
+```json
+{
+  "mode": "doc",
+  "intent": "report",
+  "title": "Premiere Pro 10 Moves",
+  "text": "# Premiere Pro 10 Moves\n\nTen editing moves every Premiere editor should have wired into muscle memory.\n\n## 1. Ripple Delete\n\nThe most underused key in editing. Select a gap and hit Delete. The timeline closes around it without you touching a clip.\n\n### When to use it\n\nAny time you cut a line of dialogue and the room tone gap is awkward. Also works for removing reaction shots that are too long.\n\n## 2. Rolling Edit\n\nAdjust where two clips meet without changing the overall duration of your sequence.\n\n```\nShortcut: N (select tool), then drag the edit point\n```\n\n## 3. Rate Stretch\n\nStretch or compress a clip to fill a gap. The math happens automatically.\n\n1. Select the Rate Stretch tool (R)\n2. Drag the clip edge to the target duration\n3. Premiere adjusts playback speed to fit\n\n## 4. Nest Sequences\n\nGroup clips into a sub-sequence when a section gets complicated. Keeps the main timeline readable.\n\n- Select the clips you want to group\n- Right-click, choose Nest\n- Name it something useful\n\n## 5. Auto Reframe\n\nUse the `Auto Reframe` effect to reformat horizontal footage for vertical without manually keyframing."
 }
 ```

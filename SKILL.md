@@ -77,6 +77,36 @@ The `prompt` field on a section renders as a styled callout block underneath the
 
 ---
 
+### Two intents: draft vs report
+
+Doc mode has two rendering modes controlled by the `intent` field. When `intent` is missing, it defaults to `"draft"`.
+
+**`intent: "draft"` (default):** Every section is editable inline. Toolbar shows "Copy Text" and "Send to Claude." Per-section note toggles appear on hover. General notes box at the bottom. This is the right shape for email drafts, recap emails, and anything you want to hand back to Claude with edits.
+
+```json
+{
+  "mode": "doc",
+  "intent": "draft",
+  "title": "Week 4 Recap Draft",
+  "text": "# See you Wednesday\n\n## What we covered\n\nThis week was all about context windows.\n\n## Homework\n\nBuild a prompt that uses a real document as context."
+}
+```
+
+**`intent: "report"`:** Body text is static - no editing. Toolbar has a single "Feedback" toggle instead of the edit buttons. When Feedback is OFF (default), the page reads like a clean article. When Feedback is ON, each section gets an "Add note" button and there's an "Overall feedback" box at the bottom. A "Copy Feedback" button formats all the notes into a clean block you can paste back into the chat. Toggle state persists across page refreshes via localStorage.
+
+```json
+{
+  "mode": "doc",
+  "intent": "report",
+  "title": "Q2 Strategy Review",
+  "text": "# Q2 Strategy Review\n\n## What worked\n\nCohort launches with 3-week email sequences consistently outperformed single announcement sends.\n\n### The key insight\n\nPeople who join the waitlist need 2-3 touchpoints before they convert. One email isn't enough.\n\n## What didn't work\n\n1. LinkedIn outreach to cold connections - conversion was under 1%\n2. Early-bird pricing windows shorter than 72 hours - created more anxiety than urgency\n3. Async-only weeks - students disengaged when there was no live session\n\n## What to try next quarter\n\n- Add a mid-cohort check-in call at week 4\n- Test a referral incentive for alumni who bring a friend\n\n```\nRevenue target: $50,000\nLikely ceiling without format change: $35,000\nGap: $15,000\n```"
+}
+```
+
+Use `"report"` any time you're sharing a document for review, not for editing. Long research outputs, strategy write-ups, episode recaps sent to a guest, post-mortems - anything where the reader's job is to read first and react second.
+
+---
+
 ### Mode 2: Shape-driven items
 
 Use this for triage, decisions, routing tasks. JSON values become UI elements automatically.
@@ -187,5 +217,8 @@ Doc mode with structured `sections`. Each section gets a note-toggle button on h
 
 **Deliberation page (think through a decision):**
 Doc mode with `sections`. Use `body` to lay out each option's facts, then add a `prompt` field per section to ask the user a reaction question. Ends with a final section that has only a `prompt` and an empty body, where they pick a direction. This is the shape for "I need to think through these options and write notes per option."
+
+**Report (read-first, optional feedback):**
+Doc mode with `intent: "report"`. Use this for long research outputs, strategy docs, episode recaps, or any document where the reader should read first and react second. Toolbar shows "Feedback" toggle. When toggled on, per-section "Add note" buttons appear along with an overall feedback box. "Copy Feedback" collects all notes in a formatted block.
 
 See `references/examples.md` for copy-paste examples.
